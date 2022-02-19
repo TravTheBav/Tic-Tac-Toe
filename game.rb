@@ -16,6 +16,7 @@ class Game
       @current_player = @players[0]
       position = @current_player.get_move
       board.update(position, @current_player.symbol)
+      toggle_next_player
     end
   end  
   
@@ -25,5 +26,9 @@ class Game
     puts "Player 2, enter your name: "
     p2 = Player.new(:O)
     players.push(p1, p2)
+  end
+
+  def toggle_next_player
+    @players.reverse!
   end
 end
