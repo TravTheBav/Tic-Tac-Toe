@@ -22,10 +22,10 @@ class Board
       row.each_with_index do |box, idx|
         case idx
         when 2
-          print box
+          print box.to_s
           puts
         else
-          print box + '|'
+          print box.to_s + '|'
         end
       end
     end
