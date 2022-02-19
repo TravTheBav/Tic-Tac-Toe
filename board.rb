@@ -2,7 +2,7 @@ class Board
   attr_accessor :rows
     
   def initialize
-    @rows = Array.new(3) { Array.new(3) }
+    @rows = Array.new(3) { Array.new(3, '_') }
   end
 
   # use board[pos] where pos is [row, col] to easily access board positions
@@ -15,5 +15,20 @@ class Board
   def []=(pos, symbol)
     row, col = pos
     @rows[row][col] = symbol
-  end  
+  end
+  
+  def render
+    @rows.each do |row|
+      row.each_with_index do |box, idx|
+        case idx
+        when 2
+          print box
+          puts
+        else
+          print box + '|'
+        end
+      end
+    end
+  end
+
 end
