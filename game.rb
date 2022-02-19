@@ -1,21 +1,29 @@
 class Game
+  attr_accessor :board, :players 
+  
   def initialize(board)
     @board = board
     @players = []
+    @current_player
   end  
   
   def play
     puts "Let's play Tic Tac Toe!"
     setup_players
+    until board.winner? || board.is_full?
+      system('clear')
+      board.render
+      @current_player = @players[0]
+      position = @current_player.get_move
+      board.update(position, @current_player.symbol)
+    end
   end  
   
   def setup_players
     puts "Player 1, enter your name: "
-    p1_name = gets.chomp
+    p1 = Player.new(:X)
     puts "Player 2, enter your name: "
-    p2_name = gets.chomp
-    p1 = Player.new(p1_name, :X)
-    p2 = Player.new(p2_name, :O)
-    @players.push(p1, p2)
+    p2 = Player.new(:O)
+    players.push(p1, p2)
   end
 end

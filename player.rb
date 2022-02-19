@@ -1,5 +1,8 @@
 class Player
-  def initialize
-    @name
+  attr_reader :symbol, :name
+
+  def initialize(symbol)
+    @symbol = symbol
+    @name = gets.chomp
   end
 end
