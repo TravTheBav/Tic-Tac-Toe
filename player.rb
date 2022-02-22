@@ -10,5 +10,4 @@ class Player
     puts 'Enter a board position (e.g. 0,1): '
     gets.chomp
   end
-
 end
