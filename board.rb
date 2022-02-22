@@ -31,6 +31,32 @@ class Board
     end
   end
 
+  # a position string is valid if the following criteria are met:
+  #   1.) must be a string of length 3
+  #   2.) second char must be a comma
+  #   3.) num chars must be '0', '1', or '2'
+  def valid_pos?(pos)
+    valid_nums = '012'
+    if pos.length == 3 &&
+       pos[1] == ',' &&
+       valid_nums.include?(pos[0]) &&
+       valid_nums.include?(pos[2])
+      return true
+    end
+
+    false
+  end
+
+  # entered position is in string format (e.g. '0,2')
+  def empty_pos?(pos)
+    pos = [pos[0].to_i, pos[2].to_i]
+    self[pos] == '_'
+  end
+
+  def update_pos(pos, symbol)
+    self[pos] = symbol
+  end
+
   def winner?
     check_rows || check_cols || check_diagonals
   end

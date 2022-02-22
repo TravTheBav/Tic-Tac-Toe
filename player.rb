@@ -5,4 +5,10 @@ class Player
     @symbol = symbol
     @name = gets.chomp
   end
+
+  def move
+    puts 'Enter a board position (e.g. 0,1): '
+    gets.chomp
+  end
+
 end
