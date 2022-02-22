@@ -1,5 +1,5 @@
-require_relative 'game.rb'
-require_relative 'board.rb'
+require_relative 'game'
+require_relative 'board'
 
 board = Board.new
 game = Game.new(board)
