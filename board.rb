@@ -25,10 +25,35 @@ class Board
           print box.to_s
           puts
         else
-          print box.to_s + '|'
+          print "#{box}|"
         end
       end
     end
+  end
+
+  def winner?
+    check_rows || check_cols || check_diagonals
+  end
+
+  # helper methods for the winner? method
+  def check_rows
+    @rows.each do |row|
+      return true if row.all? { |ele| ele == :X }
+      return true if row.all? { |ele| ele == :O }
+    end
+    false
+  end
+
+  def check_cols
+    @rows.transpose.each do |col|
+      return true if col.all? { |ele| ele == :X }
+      return true if col.all? { |ele| ele == :O }
+    end
+    false
+  end
+
+  def check_diagonals
+
   end
 
 end
