@@ -46,6 +46,7 @@ class Game
   def prompt_player
     position = @current_player.move
     until @board.valid_pos?(position) && @board.empty_pos?(position)
+      puts 'Invalid position entered: must be entered correctly and not an occupied space'
       position = @current_player.move
     end
     @board.convert_pos_string(position)
