@@ -49,8 +49,14 @@ class Board
 
   # entered position is in string format (e.g. '0,2')
   def empty_pos?(pos)
-    pos = [pos[0].to_i, pos[2].to_i]
+    pos = convert_pos_string(pos)
     self[pos] == '_'
+  end
+
+  # takes in a position string and converts it to an array like so '0,2' => [0, 2]
+  def convert_pos_string(pos_string)
+    pos = pos_string.split(',')
+    pos.map(&:to_i)
   end
 
   def update_pos(pos, symbol)

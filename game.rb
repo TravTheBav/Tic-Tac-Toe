@@ -1,5 +1,5 @@
-require_relative 'board.rb'
-require_relative 'player.rb'
+require_relative 'board'
+require_relative 'player'
 
 class Game
   attr_accessor :board, :players
@@ -7,7 +7,6 @@ class Game
   def initialize(board)
     @board = board
     @players = []
-    @current_player
   end
 
   def play
@@ -32,7 +31,7 @@ class Game
     until @board.valid_pos?(position) && @board.empty_pos?(position)
       position = @current_player.move
     end
-    position = [position[0].to_i, position[2].to_i]
+    position = @board.convert_pos_string(position)
     board.update_pos(position, @current_player.symbol)
     toggle_next_player
   end
