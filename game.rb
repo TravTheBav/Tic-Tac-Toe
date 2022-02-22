@@ -10,12 +10,15 @@ class Game
   end
 
   def play
+    system('clear')
     puts "Let's play Tic Tac Toe!"
     setup_players
     start_turn until board.winner? || board.full?
+    update_terminal
     if board.winner?
-      update_terminal
       puts "#{@winner.name} wins!"
+    else
+      puts 'It was a tie'
     end
   end
 
