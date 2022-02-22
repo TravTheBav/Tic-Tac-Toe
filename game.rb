@@ -30,11 +30,7 @@ class Game
   def start_turn
     update_terminal
     @current_player = @players[0]
-    position = @current_player.move
-    until @board.valid_pos?(position) && @board.empty_pos?(position)
-      position = @current_player.move
-    end
-    position = @board.convert_pos_string(position)
+    position = prompt_player
     board.update_pos(position, @current_player.symbol)
 
     @winner = @current_player if board.winner?
@@ -44,6 +40,15 @@ class Game
   def update_terminal
     system('clear')
     board.render
+  end
+
+  # prompts player for input and returns the position array
+  def prompt_player
+    position = @current_player.move
+    until @board.valid_pos?(position) && @board.empty_pos?(position)
+      position = @current_player.move
+    end
+    @board.convert_pos_string(position)
   end
 
   def toggle_next_player
