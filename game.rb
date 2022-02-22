@@ -11,12 +11,8 @@ class Game
     puts "Let's play Tic Tac Toe!"
     setup_players
     until board.winner? || board.full?
-      system('clear')
-      board.render
-      @current_player = @players[0]
-      position = @current_player.get_move
-      board.update(position, @current_player.symbol)
-      toggle_next_player
+      start_turn
+    end
     end
   end  
   
@@ -26,6 +22,15 @@ class Game
     puts "Player 2, enter your name: "
     p2 = Player.new(:O)
     players.push(p1, p2)
+  end
+
+  def start_turn
+    system('clear')
+    board.render
+    @current_player = @players[0]
+    position = @current_player.get_move
+    board.update(position, @current_player.symbol)
+    toggle_next_player
   end
 
   def toggle_next_player
