@@ -80,4 +80,9 @@ class Board
     check_diagonal_dexter || check_diagonal_sinister
   end
   # end of winner? helper methods
+
+  # checks if all spaces are filled and there is no winner
+  def full?
+    @rows.flatten.none? { |ele| ele == '_' }
+  end
 end

@@ -1,16 +1,16 @@
 class Game
-  attr_accessor :board, :players 
-  
+  attr_accessor :board, :players
+
   def initialize(board)
     @board = board
     @players = []
     @current_player
-  end  
+  end
   
   def play
     puts "Let's play Tic Tac Toe!"
     setup_players
-    until board.winner? || board.is_full?
+    until board.winner? || board.full?
       system('clear')
       board.render
       @current_player = @players[0]
