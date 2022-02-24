@@ -6,10 +6,10 @@ On your turn, input where you want to place your X or O using a coordinate syste
 
 Board coordinates are mapped like so:
 
-    0   1   2
-0   _ | _ | _
-1   _ | _ | _
-2   _ | _ | _
+        0   1   2
+    0   _ | _ | _
+    1   _ | _ | _
+    2   _ | _ | _
 
 So for example, if you want to put your mark in the middle of the board, enter 1,1 when prompted
 
