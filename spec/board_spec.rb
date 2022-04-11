@@ -255,4 +255,27 @@ describe Board do
     end
   end
 
+  describe '#valid_pos?' do
+    context "when given a string that is not a comma seperated coordinate" do
+      it 'returns false' do
+        result = board.valid_pos?('foobar')
+        expect(result).to be false
+      end
+    end
+
+    context "when given a coordinate that is out of the board's range" do
+      it 'returns false' do
+        result = board.valid_pos?('5,4')
+        expect(result).to be false
+      end
+    end
+
+    context 'when given a comma seperated coordinate with two values within range 0-2' do
+      it 'returns true' do
+        result = board.valid_pos?('0,1')
+        expect(result).to be true
+      end
+    end
+  end
+
 end
