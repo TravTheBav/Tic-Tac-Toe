@@ -2,11 +2,10 @@
 
 require_relative '../lib/board'
 
-describe Board do 
+describe Board do
+  subject(:board) { described_class.new }
 
   describe '#winner?' do
-    subject(:board) { described_class.new }
-
     context 'when there is no winner' do
       before do
         allow(board).to receive(:check_rows).and_return(false)
@@ -57,8 +56,6 @@ describe Board do
   end
 
   describe '#full?' do
-    subject(:board) { described_class.new }
-
     context 'when board has empty spaces' do
       it 'returns false' do
         expect(board).not_to be_full
@@ -68,9 +65,9 @@ describe Board do
     context 'when some spaces are filled' do
       before do
         board.instance_variable_set(:@rows, [
-          ['_', 'X', '_'],
-          ['O', '_', 'X'],
-          ['O', 'X', '_']
+          ['_', :X, '_'],
+          [:O, '_', :X],
+          [:O, :X, '_']
         ])
       end
 
@@ -81,13 +78,61 @@ describe Board do
 
     context 'when board has no more empty spaces' do
       before do
-        board.instance_variable_set(:@rows, Array.new(3) { Array.new(3, 'X') })      
+        board.instance_variable_set(:@rows, Array.new(3) { Array.new(3, :X) })      
       end      
       
       it 'returns true' do
         expect(board).to be_full
       end
     end
+  end
+
+  describe '#check_rows' do
+    context 'when all rows are empty' do
+      it 'returns false' do
+        result = board.check_rows
+        expect(result).to be false
+      end
+    end
+
+    context 'when a row is full but not a three of a kind match' do
+      before do
+        board.instance_variable_set(:@rows, [
+          ['_', '_', '_'],
+          [:X, :O, :X],
+          ['_', '_', '_']
+        ])
+      end
+
+      it 'returns false' do
+        result = board.check_rows
+        expect(result).to be false
+      end
+    end
+
+    context "when a row contains three X's" do
+      before do
+        board.instance_variable_set(:@rows, [
+            ['_', '_', '_'],
+            [:X, :X, :X],
+            ['_', '_', '_']
+        ])
+      end
+
+      it 'returns true' do
+        result = board.check_rows
+        expect(result).to be true
+      end
+    end
+  end
+
+  describe '#check_cols' do
+  end
+
+  describe '#check_diagonal_dexter' do
+  end
+
+  describe '#check_diagonal_sinister' do
   end
 
 end
