@@ -165,10 +165,94 @@ describe Board do
     end
   end
 
+  describe '#check_diagonals' do
+    context 'when neither diagonal contains a three of a kind match' do
+      before do
+        allow(board).to receive(:check_diagonal_dexter).and_return(false)
+        allow(board).to receive(:check_diagonal_sinister).and_return(false)
+      end
+
+      it 'returns false' do
+        result = board.check_diagonals
+        expect(result).to be false
+      end
+    end
+
+    context 'when a diagonal contains a three of a kind match' do
+      before do
+        allow(board).to receive(:check_diagonal_dexter).and_return(false)
+        allow(board).to receive(:check_diagonal_sinister).and_return(true)
+      end
+
+      it 'returns true' do
+        result = board.check_diagonals
+        expect(result).to be true
+      end
+    end
+  end
+
   describe '#check_diagonal_dexter' do
+    context 'when the diagonal from top left to bottom right does not contain a match' do
+      before do
+        board.instance_variable_set(:@rows, [
+          [:X, '_', '_'],
+          ['_', :O, '_'],
+          ['_', '_', :X]
+        ])
+      end
+      
+      it 'returns false' do
+        result = board.check_diagonal_dexter
+        expect(result).to be false
+      end
+    end
+
+    context "when the diagonal from top left to bottom right contains three X's" do
+      before do
+        board.instance_variable_set(:@rows, [
+          [:X, '_', '_'],
+          ['_', :X, '_'],
+          ['_', '_', :X]
+        ])
+      end
+
+      it 'returns true' do
+        result = board.check_diagonal_dexter
+        expect(result).to be true
+      end
+    end
   end
 
   describe '#check_diagonal_sinister' do
+    context 'when the diagonal from bottom left to top right does not contain a match' do
+      before do
+        board.instance_variable_set(:@rows, [
+          ['_', '_', :O],
+          ['_', :X, '_'],
+          [:O, '_', '_']
+        ])
+      end
+
+      it 'returns false' do
+        result = board.check_diagonal_sinister
+        expect(result).to be false
+      end
+    end
+
+    context "when the diagonal from bottom left to top right contains three X's" do
+      before do
+        board.instance_variable_set(:@rows, [
+          ['_', '_', :X],
+          ['_', :X, '_'],
+          [:X, '_', '_']
+        ])
+      end
+
+      it 'returns true' do
+        result = board.check_diagonal_sinister
+        expect(result).to be true
+      end
+    end
   end
 
 end
